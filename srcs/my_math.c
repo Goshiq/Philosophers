@@ -1,6 +1,6 @@
 #include "my_math.h"
 
-int		check_overflow(size_t num, int i, int dig)
+int	check_overflow(size_t num, int i, int dig)
 {
 	if (i == num_len(SIZE_MAX) - 1)
 	{
@@ -12,7 +12,7 @@ int		check_overflow(size_t num, int i, int dig)
 	return (0);
 }
 
-int		ft_atoi(size_t *num, char *str)
+int	ft_atoi(size_t *num, char *str)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int		ft_atoi(size_t *num, char *str)
 	return (0);
 }
 
-int		ft_is_num(char c)
+int	ft_is_num(char c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);

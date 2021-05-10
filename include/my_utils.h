@@ -3,7 +3,7 @@
 
 # include <stdio.h>
 
-typedef	struct	s_data
+typedef struct s_data
 {
 	size_t	num_phil;
 	size_t	t_die;

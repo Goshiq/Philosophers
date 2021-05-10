@@ -10,7 +10,7 @@ void	ft_init(t_data *inp)
 	inp->limit = 0;
 }
 
-int		parse_it(t_data *inp, int argc, char **argv)
+int	parse_it(t_data *inp, int argc, char **argv)
 {
 	ft_init(inp);
 	if (ft_atoi(&(inp->num_phil), argv[1]) || ft_atoi(&(inp->t_die), argv[2])
