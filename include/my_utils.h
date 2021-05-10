@@ -10,6 +10,7 @@ typedef	struct	s_data
 	size_t	t_eat;
 	size_t	t_sleep;
 	size_t	num_eat;
+	int		limit;
 }				t_data;
 
 int		ft_atoi(size_t *num, char *str);

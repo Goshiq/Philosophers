@@ -11,4 +11,5 @@ int	main(int argc, char **argv)
 	printf("%lu\n", inp.t_eat);
 	printf("%lu\n", inp.t_sleep);
 	printf("%lu\n", inp.num_eat);
+	printf("%d\n", inp.limit);
 }
