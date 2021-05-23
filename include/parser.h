@@ -1,5 +1,5 @@
-#ifndef MY_UTILS_H
-# define MY_UTILS_H
+#ifndef PARSER_H
+# define PARSER_H
 
 # include <stdio.h>
 
@@ -13,9 +13,7 @@ typedef struct s_data
 	int		limit;
 }				t_data;
 
-int		ft_atoi(size_t *num, char *str);
 int		ft_err(char *str);
-int		ft_is_num(char c);
 void	ft_init(t_data *inp);
 int		parse_it (t_data *inp, int argc, char **argv);
 
