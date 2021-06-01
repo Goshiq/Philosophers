@@ -1,39 +1,50 @@
 #include "phil.h"
 
-void	*do_eat(void *ptr)
+void	*main_loop(void *ptr)
 {
-	printf("%s\n", (char *)ptr);
-	return 0x0;
+	t_data			*inp;
+	size_t			i;
+
+	inp = (t_data *)ptr;
+	i = 0;
+//	pthread_mutex_lock(inp->m_id + inp->curr_id);
+	pthread_mutex_lock(inp->m_id);
+	while (i++ < 10)
+		printf("Id is: %d\n", inp->curr_id);
+	pthread_mutex_unlock(inp->m_id);
+	return (0x0);
 }
 
-int		main(int argc, char **argv)
+int	create_env(t_data *inp)
 {
-	t_data		inp;
-	pthread_t	*t_id;
-	int			*ids;
-	size_t		i;
+	size_t	i;
 
-	if (argc < 5 || argc > 6 || parse_it(&inp, argc, argv))
-		return (ft_err("Error: argument\n"));
-	if (!(t_id = malloc(sizeof(pthread_t) * inp.num_phil)) ||
-			!(ids = malloc(sizeof(int) * inp.num_phil)) || 0 > inp.num_phil)
-		return (ft_err("Error: malloc error\n"));
-    printf("ids is %p\n", ids);
-    printf("pthread is %p\n", t_id);
-	printf("%lu\n", inp.num_phil);
-	printf("%lu\n", inp.t_die);
-	printf("%lu\n", inp.t_eat);
-	printf("%lu\n", inp.t_sleep);
-	printf("%lu\n", inp.num_eat);
-	printf("%d\n", inp.limit);
 	i = 0;
-	while (i < inp.num_phil)
+	while (i < inp->num_phil)
 	{
-		ids[i] = pthread_create(t_id + i, NULL, do_eat, (void *)"Hahaha");
-		pthread_join(t_id[i], NULL);
-		printf("return is: %d\n", ids[i]);
-		i++;
+		inp->curr_id = i;
+		pthread_mutex_init(inp->m_id + i, 0x0);
+		if (pthread_create(inp->t_id + i, 0x0, main_loop, (void *)inp) > 0)
+			return (1);
+		pthread_join(*(inp->t_id + i++), 0x0);
 	}
-	i = 0;
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_data		*in;
+
+	in = malloc(sizeof(t_data));
+	if (!in)
+		return (ft_err("Error: malloc error\n"));
+	if (argc < 5 || argc > 6 || parse_it(in, argc, argv))
+		return (ft_err("Error: argument\n"));
+	in->t_id = malloc(sizeof(pthread_t) * in->num_phil);
+	in->m_id = malloc(sizeof(pthread_mutex_t) * in->num_phil);
+	if (!in->t_id || !in->m_id || 0 > in->num_phil)
+		return (ft_err("Error: malloc error\n"));
+	if (create_env(in))
+		return (ft_err("Error: treads error\n"));
 	return (0);
 }
