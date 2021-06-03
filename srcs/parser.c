@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "phil.h"
 
 void	ft_init(t_data *inp)
 {
@@ -10,7 +10,8 @@ void	ft_init(t_data *inp)
 	inp->limit = 0;
 	inp->t_id = 0x0;
 	inp->m_id = 0x0;
-	inp->curr_id = -1;
+	inp->start = p_time();
+	inp->dead_id = -2;
 }
 
 int	parse_it(t_data *inp, int argc, char **argv)

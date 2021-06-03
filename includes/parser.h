@@ -1,9 +1,9 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include <phil.h>
+# include <pthread.h>
 
-typedef struct s_data
+typedef struct		s_data
 {
 	size_t			num_phil;
 	size_t			t_die;
@@ -13,10 +13,11 @@ typedef struct s_data
 	int				limit;
 	pthread_t		*t_id;
 	pthread_mutex_t	*m_id;
-	int				curr_id;
-}				t_data;
+	size_t			start;
+	int				dead_id;
+}					t_data;
 
-int		ft_err(char *str);
+void	ft_err(char *str);
 void	ft_init(t_data *inp);
 int		parse_it (t_data *inp, int argc, char **argv);
 
