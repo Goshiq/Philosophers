@@ -1,8 +1,8 @@
 #include "phil.h"
 
-void	ft_err(char *str)
+int	ft_err(char *str)
 {
 	if (str)
 		printf("%s", str);
-	exit(1);
+	return(1);
 }

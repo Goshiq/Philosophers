@@ -13,12 +13,23 @@ typedef struct		s_data
 	int				limit;
 	pthread_t		*t_id;
 	pthread_mutex_t	*m_id;
+	pthread_mutex_t	*m_write;
 	size_t			start;
 	int				dead_id;
 }					t_data;
 
-void	ft_err(char *str);
-void	ft_init(t_data *inp);
+typedef struct		s_ph
+{
+	int				id;
+	t_data			*in;
+	pthread_mutex_t	*right;
+	pthread_mutex_t	*left;
+	size_t			time_to_die;
+}					t_ph;
+
+int		ft_err(char *str);
+void	init_inp(t_data *inp);
+int		init_phil(t_data *in, t_ph *phils);
 int		parse_it (t_data *inp, int argc, char **argv);
 
 #endif
