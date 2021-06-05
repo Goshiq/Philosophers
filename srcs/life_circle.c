@@ -21,10 +21,12 @@ void	*life(void *ptr)
 	t_ph	*ph;
 
 	ph = (t_ph *)ptr;
+	/*
 	if (pthread_create(ph->in->t_id + ph->id + ph->in->num_phil, 0x0,
 			l_watcher, (void *)ph) > 0)
 		ph->in->dead_id = ph->id;
 	pthread_detach(*(ph->in->t_id + ph->id + ph->in->num_phil));
+	*/
 	while (1)
 	{
 		p_eat(ph);

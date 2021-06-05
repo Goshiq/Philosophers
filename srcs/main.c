@@ -1,7 +1,8 @@
 #include "phil.h"
 
-void	g_watcher(t_data *inp)
+void	g_watcher(t_data *inp, t_ph *phils)
 {
+	/*
 	while (inp->dead_id < -1)
 	{
 		pthread_mutex_lock(inp->count);
@@ -18,6 +19,29 @@ void	g_watcher(t_data *inp)
 		pthread_mutex_lock(inp->m_write);
 		printf(RED"%lu %d died\n",
 			p_time() - inp->start, inp->dead_id + 1);
+	}
+	*/
+	size_t	i;
+	int		k;
+
+	i = 0;
+	k = 1;
+	while (k)
+	{
+		i = 0;
+		while (i < inp->num_phil)
+		{
+			if (p_time() > phils[i].time_to_die)
+			{
+				if (phils[i].num_eat < inp->num_eat)
+				{
+					pthread_mutex_lock(inp->m_write);
+					put_alot(p_time() - inp->start, phils[i].id, " died\n");
+				}
+				k = 0;
+				break ;
+			}
+		}
 	}
 }
 
@@ -38,8 +62,7 @@ int	create_env(t_data *inp, t_ph *phils)
 			return (1);
 		pthread_detach(inp->t_id[i]);
 		i++;
-		if (inp->num_phil == 2)
-			usleep(40);
+		usleep(40);
 	}
 	i = 0;
 	return (0);
@@ -55,7 +78,7 @@ int	main(int argc, char **argv)
 		return (ft_err("Error: malloc error\n"));
 	if (argc < 5 || argc > 6 || parse_it(in, argc, argv))
 		return (ft_err("Error: argument\n"));
-	in->t_id = malloc(sizeof(pthread_t) * in->num_phil * 2);
+	in->t_id = malloc(sizeof(pthread_t) * in->num_phil);
 	in->m_id = malloc(sizeof(pthread_mutex_t) * in->num_phil);
 	in->m_write = malloc(sizeof(pthread_mutex_t));
 	in->count = malloc(sizeof(pthread_mutex_t));
@@ -64,7 +87,7 @@ int	main(int argc, char **argv)
 		return (ft_err("Error: malloc error\n"));
 	if (init_phil(in, phils) || create_env(in, phils))
 		return (ft_err("Error: threads error\n"));
-	g_watcher(in);
+	g_watcher(in, phils);
 	free_all(in, phils);
 	return (0);
 }
