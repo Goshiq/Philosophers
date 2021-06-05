@@ -9,4 +9,10 @@
 # include "my_math.h"
 # include "utils.h"
 
+void	p_eat(t_ph *ptr);
+void	*life(void *ptr);
+void	*l_watcher(void *ptr);
+void	p_think(t_ph *ptr);
+void	p_sleep(t_ph *ptr);
+
 #endif

@@ -26,7 +26,7 @@ int	init_phil(t_data *in, t_ph *phils)
 		phils[i].in = in;
 		phils[i].left = &(in->m_id[i]);
 		phils[i].right = &(in->m_id[(i + 1) % in->num_phil]);
-		phils[i].time_to_die = 0;
+		phils[i].time_to_die = p_time() + in->t_die;
 		i++;
     }
 	return (0);
