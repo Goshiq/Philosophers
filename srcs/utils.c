@@ -8,23 +8,42 @@ size_t	p_time(void)
 	return (what_time_is_it.tv_sec * 1000 + what_time_is_it.tv_usec / 1000);
 }
 
-void	free_all(t_data *in, t_ph *phils)
+void	putstr(char *str)
 {
-	size_t	i;
+	while (*str)
+		write(1, str++, 1);
+}
 
-	i = 0;
-	if (phils)
-		free(phils);
-	if (in)
+void	put_alot(size_t n1, size_t n2, char *str)
+{
+	putnum(n1);
+	putstr(" ");
+	putnum(n2 + 1);
+	putstr(str);
+}
+
+size_t	my_pow(int i)
+{
+	size_t	ans;
+
+	ans = 1;
+	while (i-- > 1)
+		ans *= 10;
+	return (ans);
+}
+
+void	putnum(size_t num)
+{
+	char	c;
+	int		i;
+	size_t	div;
+
+	i = num_len(num);
+	while (i-- > 0)
 	{
-		pthread_mutex_destroy(in->m_write);
-		while (i < in->num_phil)
-			pthread_mutex_destroy(in->m_id + i++);
-		if (in->m_write)
-			free(in->m_write);
-		if (in->m_id)
-			free(in->m_id);
-		if (in->t_id)
-			free(in->t_id);
+		div = my_pow(i + 1);
+		c = num / div + 48;
+		write(1, &c, 1);
+		num %= div;
 	}
 }
