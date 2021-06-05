@@ -33,15 +33,15 @@ void	p_eat(t_ph *ph)
 {
 	pthread_mutex_lock(ph->left);
 	pthread_mutex_lock(ph->in->m_write);
-	printf("%lu %d has taken a fork\n", p_time() - ph->in->start, ph->id + 1);
+	printf("%lu %lu has taken a fork\n", p_time() - ph->in->start, ph->id + 1);
 	pthread_mutex_unlock(ph->in->m_write);
 	pthread_mutex_lock(ph->right);
 	pthread_mutex_lock(ph->in->m_write);
-	printf("%lu %d has taken a fork\n", p_time() - ph->in->start, ph->id + 1);
+	printf("%lu %lu has taken a fork\n", p_time() - ph->in->start, ph->id + 1);
 	pthread_mutex_unlock(ph->in->m_write);
 	ph->time_to_die = p_time() + ph->in->t_die;
 	pthread_mutex_lock(ph->in->m_write);
-	printf("%lu %d is eating\n", p_time() - ph->in->start, ph->id + 1);
+	printf("%lu %lu is eating\n", p_time() - ph->in->start, ph->id + 1);
 	pthread_mutex_unlock(ph->in->m_write);
 	usleep(ph->in->t_eat);
 	pthread_mutex_unlock(ph->right);
@@ -52,14 +52,14 @@ void	p_eat(t_ph *ph)
 void	p_think(t_ph *ph)
 {
 	pthread_mutex_lock(ph->in->m_write);
-	printf("%lu %d is thinking\n", p_time() - ph->in->start, ph->id + 1);
+	printf("%lu %lu is thinking\n", p_time() - ph->in->start, ph->id + 1);
 	pthread_mutex_unlock(ph->in->m_write);
 }
 
 void	p_sleep(t_ph *ph)
 {
 	pthread_mutex_lock(ph->in->m_write);
-	printf("%lu %d is sleeping\n", p_time() - ph->in->start, ph->id + 1);
+	printf("%lu %lu is sleeping\n", p_time() - ph->in->start, ph->id + 1);
 	usleep(ph->in->t_sleep);
 	pthread_mutex_unlock(ph->in->m_write);
 }

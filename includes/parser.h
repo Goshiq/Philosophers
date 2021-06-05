@@ -20,7 +20,7 @@ typedef struct		s_data
 
 typedef struct		s_ph
 {
-	int				id;
+	size_t			id;
 	t_data			*in;
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*left;
