@@ -6,6 +6,7 @@
 typedef struct		s_data
 {
 	size_t			num_phil;
+	size_t			counter;
 	size_t			t_die;
 	size_t			t_eat;
 	size_t			t_sleep;
@@ -14,6 +15,7 @@ typedef struct		s_data
 	pthread_t		*t_id;
 	pthread_mutex_t	*m_id;
 	pthread_mutex_t	*m_write;
+	pthread_mutex_t	*count;
 	size_t			start;
 	int				dead_id;
 }					t_data;
@@ -25,6 +27,7 @@ typedef struct		s_ph
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*left;
 	size_t			time_to_die;
+	size_t			num_eat;
 }					t_ph;
 
 int		ft_err(char *str);

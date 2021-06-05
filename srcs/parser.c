@@ -3,6 +3,7 @@
 void	init_inp(t_data *inp)
 {
 	inp->num_phil = 0;
+	inp->counter = 0;
 	inp->t_die = 0;
 	inp->t_eat = 0;
 	inp->t_sleep = 0;
@@ -11,6 +12,7 @@ void	init_inp(t_data *inp)
 	inp->t_id = 0x0;
 	inp->m_id = 0x0;
 	inp->m_write = 0x0;
+	inp->count = 0x0;
 	inp->start = p_time();
 	inp->dead_id = -2;
 }
@@ -24,9 +26,15 @@ int	init_phil(t_data *in, t_ph *phils)
 	{
 		phils[i].id = i;
 		phils[i].in = in;
-		phils[i].left = &(in->m_id[i]);
-		phils[i].right = &(in->m_id[(i + 1) % in->num_phil]);
+		phils[i].right = in->m_id + i;
+		phils[i].left = in->m_id + (i + 1) % in->num_phil;
 		phils[i].time_to_die = p_time() + in->t_die;
+		phils[i].num_eat = 0;
+		/*
+		printf("id =\t%lu\n", phils[i].id);
+		printf("left =\t%p\n", phils[i].left);
+		printf("right =\t%p\n\n", phils[i].right);
+		*/
 		i++;
     }
 	return (0);
@@ -38,6 +46,10 @@ int	parse_it(t_data *inp, int argc, char **argv)
 	if (ft_atoi(&(inp->num_phil), argv[1]) || ft_atoi(&(inp->t_die), argv[2])
 		|| ft_atoi(&(inp->t_eat), argv[3]) || ft_atoi(&(inp->t_sleep), argv[4]))
 		return (1);
+	inp->counter = inp->num_phil;
+	inp->t_die *= 1000;
+	inp->t_eat *= 1000;
+	inp->t_sleep *= 1000;
 	if (argc == 6)
 	{
 		if (ft_atoi((&inp->num_eat), argv[5]))
