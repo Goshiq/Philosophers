@@ -9,6 +9,10 @@ void	free_all(t_data *in, t_ph *phils)
 		free(phils);
 	if (in)
 	{
+		sem_unlink("forks");
+		sem_unlink("count");
+		sem_unlink("dead");
+		sem_unlink("write");
 		if (in->t_id)
 			free(in->t_id);
 		free(in);

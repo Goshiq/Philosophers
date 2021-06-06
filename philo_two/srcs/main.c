@@ -30,13 +30,13 @@ void	g_watcher(t_data *inp, t_ph *phils)
 int	init_sem(t_data *inp)
 {
 	sem_unlink("forks");
-	inp->s_id = sem_open("forks", O_CREAT, 0644, inp->num_phil);
+	inp->s_id = sem_open("forks", O_CREAT, 0777, inp->num_phil);
 	sem_unlink("write");
-	inp->s_write = sem_open("write", O_CREAT, 0644, 1);
+	inp->s_write = sem_open("write", O_CREAT, 0777, 1);
 	sem_unlink("count");
-	inp->s_count = sem_open("count", O_CREAT, 0644, 1);
+	inp->s_count = sem_open("count", O_CREAT, 0777, 1);
 	sem_unlink("dead");
-	inp->s_dead = sem_open("dead", O_CREAT, 0644, 1);
+	inp->s_dead = sem_open("dead", O_CREAT, 0777, 1);
 	if (inp->s_id == SEM_FAILED || inp->s_write == SEM_FAILED
 		|| inp->s_dead == SEM_FAILED || inp->s_count == SEM_FAILED)
 		return (1);
