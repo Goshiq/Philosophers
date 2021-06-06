@@ -2,25 +2,24 @@
 
 void	g_watcher(t_data *inp, t_ph *phils)
 {
-	static size_t	i[2];
+	size_t	i;
 
-	while (!i[1])
+	while (1)
 	{
 		if (inp->counter <= 0)
 			break ;
-		i[0] = 0;
-		while (i[0]++ < inp->num_phil)
+		i = 0;
+		while (i++ < inp->num_phil)
 		{
 			pthread_mutex_lock(inp->m_dead);
-			if (p_time() > phils[i[0] - 1].time_to_die + 5)
+			if (p_time() > phils[i - 1].time_to_die + 5)
 			{
 				pthread_mutex_unlock(inp->m_dead);
-				if (inp->limit && phils[i[0] - 1].num_eat == inp->num_eat)
+				if (inp->limit && phils[i - 1].num_eat == inp->num_eat)
 					continue ;
 				pthread_mutex_lock(inp->m_write);
-				put_alot(p_time() - inp->start, phils[i[0] - 1].id, " died\n");
-				i[1] = 1;
-				break ;
+				put_alot(p_time() - inp->start, phils[i - 1].id, " died\n");
+				return ;
 			}
 			pthread_mutex_unlock(inp->m_dead);
 		}
