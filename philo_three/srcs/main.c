@@ -89,7 +89,6 @@ int	main(int argc, char **argv)
 		return (ft_err("Error: malloc error\n"));
 	if (init_phil(in, phils) || create_env(in, phils))
 		return (ft_err("Error: processes error\n"));
-	//g_watcher(in, phils);
 	free_all(in, phils);
 	return (0);
 }
