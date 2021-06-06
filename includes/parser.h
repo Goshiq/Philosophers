@@ -23,6 +23,7 @@ typedef struct s_data
 	pthread_t		*t_id;
 	pthread_mutex_t	*m_id;
 	pthread_mutex_t	*m_write;
+	pthread_mutex_t	*m_dead;
 	pthread_mutex_t	*count;
 	size_t			start;
 	int				dead_id;

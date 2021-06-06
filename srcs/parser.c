@@ -7,11 +7,12 @@ void	init_inp(t_data *inp)
 	inp->t_die = 0;
 	inp->t_eat = 0;
 	inp->t_sleep = 0;
-	inp->num_eat = 0;
+	inp->num_eat = -1;
 	inp->limit = 0;
 	inp->t_id = 0x0;
 	inp->m_id = 0x0;
 	inp->m_write = 0x0;
+	inp->m_dead = 0x0;
 	inp->count = 0x0;
 	inp->start = p_time();
 	inp->dead_id = -2;
