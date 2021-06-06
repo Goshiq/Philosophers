@@ -1,6 +1,7 @@
 #ifndef PHIL_H
 # define PHIL_H
 
+# include <semaphore.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/time.h>

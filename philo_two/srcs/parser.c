@@ -10,10 +10,10 @@ void	init_inp(t_data *inp)
 	inp->num_eat = -1;
 	inp->limit = 0;
 	inp->t_id = 0x0;
-	inp->m_id = 0x0;
-	inp->m_write = 0x0;
-	inp->m_dead = 0x0;
-	inp->count = 0x0;
+	inp->s_id = 0x0;
+	inp->s_write = 0x0;
+	inp->s_dead = 0x0;
+	inp->s_count = 0x0;
 	inp->start = p_time();
 	inp->dead_id = -2;
 }
@@ -27,8 +27,6 @@ int	init_phil(t_data *in, t_ph *phils)
 	{
 		phils[i].id = i;
 		phils[i].in = in;
-		phils[i].right = in->m_id + i;
-		phils[i].left = in->m_id + (i + 1) % in->num_phil;
 		phils[i].time_to_die = p_time() + in->t_die;
 		phils[i].num_eat = 0;
 		i++;

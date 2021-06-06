@@ -20,5 +20,6 @@ void	free_all(t_data *in, t_ph *phils)
 			free(in->m_id);
 		if (in->t_id)
 			free(in->t_id);
+		free(in);
 	}
 }

@@ -21,10 +21,10 @@ typedef struct s_data
 	size_t			num_eat;
 	int				limit;
 	pthread_t		*t_id;
-	pthread_mutex_t	*m_id;
-	pthread_mutex_t	*m_write;
-	pthread_mutex_t	*m_dead;
-	pthread_mutex_t	*count;
+	sem_t			*s_id;
+	sem_t			*s_write;
+	sem_t			*s_dead;
+	sem_t			*s_count;
 	size_t			start;
 	int				dead_id;
 }	t_data;
@@ -33,8 +33,6 @@ typedef struct s_ph
 {
 	size_t			id;
 	t_data			*in;
-	pthread_mutex_t	*right;
-	pthread_mutex_t	*left;
 	size_t			time_to_die;
 	size_t			num_eat;
 }	t_ph;

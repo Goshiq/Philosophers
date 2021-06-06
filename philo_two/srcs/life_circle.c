@@ -26,9 +26,9 @@ void	*life(void *ptr)
 		p_eat(ph);
 		if (ph->in->limit && ph->num_eat == ph->in->num_eat)
 		{
-			pthread_mutex_lock(ph->in->count);
+			sem_wait(ph->in->s_count);
 			ph->in->counter--;
-			pthread_mutex_unlock(ph->in->count);
+			sem_post(ph->in->s_count);
 			break ;
 		}
 		p_sleep(ph);
@@ -39,37 +39,37 @@ void	*life(void *ptr)
 
 void	p_eat(t_ph *ph)
 {
-	pthread_mutex_lock(ph->right);
-	pthread_mutex_lock(ph->in->m_write);
+	sem_wait(ph->in->s_id);
+	sem_wait(ph->in->s_write);
 	put_alot(p_time() - ph->in->start, ph->id, " has taken a fork\n");
-	pthread_mutex_unlock(ph->in->m_write);
-	pthread_mutex_lock(ph->left);
-	pthread_mutex_lock(ph->in->m_write);
+	sem_post(ph->in->s_write);
+	sem_wait(ph->in->s_id);
+	sem_wait(ph->in->s_write);
 	put_alot(p_time() - ph->in->start, ph->id, " has taken a fork\n");
-	pthread_mutex_unlock(ph->in->m_write);
-	pthread_mutex_lock(ph->in->m_write);
+	sem_post(ph->in->s_write);
+	sem_wait(ph->in->s_write);
 	put_alot(p_time() - ph->in->start, ph->id, " is eating\n");
-	pthread_mutex_unlock(ph->in->m_write);
-	pthread_mutex_lock(ph->in->m_dead);
+	sem_post(ph->in->s_write);
+	sem_wait(ph->in->s_dead);
 	ph->time_to_die = p_time() + ph->in->t_die / 1000;
-	pthread_mutex_unlock(ph->in->m_dead);
+	sem_post(ph->in->s_dead);
 	usleep(ph->in->t_eat);
 	ph->num_eat++;
-	pthread_mutex_unlock(ph->right);
-	pthread_mutex_unlock(ph->left);
+	sem_post(ph->in->s_id);
+	sem_post(ph->in->s_id);
 }
 
 void	p_think(t_ph *ph)
 {
-	pthread_mutex_lock(ph->in->m_write);
+	sem_wait(ph->in->s_write);
 	put_alot(p_time() - ph->in->start, ph->id, " is thinking\n");
-	pthread_mutex_unlock(ph->in->m_write);
+	sem_post(ph->in->s_write);
 }
 
 void	p_sleep(t_ph *ph)
 {
-	pthread_mutex_lock(ph->in->m_write);
+	sem_wait(ph->in->s_write);
 	put_alot(p_time() - ph->in->start, ph->id, " is sleeping\n");
-	pthread_mutex_unlock(ph->in->m_write);
+	sem_post(ph->in->s_write);
 	usleep(ph->in->t_sleep);
 }
