@@ -67,6 +67,7 @@ int	create_env(t_data *inp, t_ph *phils)
 		usleep(50);
 	}
 	sem_wait(inp->s_end);
+	usleep(1000);
 	i = 0;
 	while (i < inp->num_phil)
 		kill(inp->pid_id[i++], SIGKILL);
