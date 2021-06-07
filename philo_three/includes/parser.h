@@ -23,8 +23,6 @@ typedef struct s_data
 	sem_t			*s_id;
 	sem_t			*s_write;
 	sem_t			*s_dead;
-	sem_t			*s_count;
-	sem_t			*s_end;
 	size_t			start;
 	int				dead_id;
 	pid_t			*pid_id;

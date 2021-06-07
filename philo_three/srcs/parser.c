@@ -12,8 +12,6 @@ void	init_inp(t_data *inp)
 	inp->s_id = 0x0;
 	inp->s_write = 0x0;
 	inp->s_dead = 0x0;
-	inp->s_count = 0x0;
-	inp->s_end = 0x0;
 	inp->start = p_time();
 	inp->dead_id = -2;
 }

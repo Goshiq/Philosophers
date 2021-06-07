@@ -8,16 +8,12 @@ void	*l_watcher(void *ptr)
 	while (1)
 	{
 		sem_wait(ph->in->s_dead);
-		if (p_time() > ph->time_to_die + 5)
+		if (p_time() > ph->time_to_die + 4)
 		{
 			sem_post(ph->in->s_dead);
 			if (ph->in->limit && ph->num_eat == ph->in->num_eat)
-			{
-				sem_post(ph->in->s_end);
-				exit(0);
-			}
+				return (0x0);
 			put_alot(p_time() - ph->in->start, ph->id, " died\n");
-			sem_post(ph->in->s_end);
 			exit(0);
 		}
 		sem_post(ph->in->s_dead);
@@ -36,10 +32,7 @@ void	life(t_ph *ph)
 	{
 		p_eat(ph);
 		if (ph->in->limit && ph->num_eat == ph->in->num_eat)
-		{
-			sem_post(ph->in->s_end);
-			exit(0);
-		}
+			return ;
 		p_sleep(ph);
 		p_think(ph);
 	}
