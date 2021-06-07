@@ -38,7 +38,7 @@ void	life(t_ph *ph)
 		if (ph->in->limit && ph->num_eat == ph->in->num_eat)
 		{
 			sem_post(ph->in->s_end);
-			exit(0) ;
+			exit(0);
 		}
 		p_sleep(ph);
 		p_think(ph);
