@@ -8,8 +8,10 @@ int	init_sem(t_data *inp)
 	inp->s_write = sem_open("write", O_CREAT, 0777, 1);
 	sem_unlink("dead");
 	inp->s_dead = sem_open("dead", O_CREAT, 0777, 1);
+	sem_unlink("count");
+	inp->s_count = sem_open("count", O_CREAT, 0777, 1);
 	if (inp->s_id == SEM_FAILED || inp->s_write == SEM_FAILED
-		|| inp->s_dead == SEM_FAILED)
+		|| inp->s_dead == SEM_FAILED || inp->s_count == SEM_FAILED)
 		return (1);
 	return (0);
 }
@@ -28,14 +30,14 @@ int	create_env(t_data *inp, t_ph *phils)
 		{
 			phils[i].id = i;
 			life(phils + i);
-			exit(0);
 		}
 		else if (inp->pid_id[i] == -1)
 			return (1);
 		i++;
+		usleep(100);
 	}
 	waitpid(-1, NULL, 0);
-	usleep(1000);
+	usleep(300000);
 	i = 0;
 	while (i < inp->num_phil)
 		kill(inp->pid_id[i++], SIGKILL);

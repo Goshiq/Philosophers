@@ -50,6 +50,8 @@ int	parse_it(t_data *inp, int argc, char **argv)
 	{
 		if (ft_atoi((&inp->num_eat), argv[5]))
 			return (1);
+		if (!inp->limit)
+			return (1);
 		inp->limit = 1;
 	}
 	if (inp->num_phil < 2)
