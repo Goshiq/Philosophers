@@ -12,13 +12,14 @@ void	g_watcher(t_data *inp, t_ph *phils)
 		while (i++ < inp->num_phil)
 		{
 			pthread_mutex_lock(inp->m_dead);
-			if (p_time() > phils[i - 1].time_to_die + 5)
+			if (p_time() > phils[i - 1].time_to_die + 4)
 			{
 				pthread_mutex_unlock(inp->m_dead);
 				if (inp->limit && phils[i - 1].num_eat == inp->num_eat)
 					continue ;
 				pthread_mutex_lock(inp->m_write);
 				put_alot(p_time() - inp->start, phils[i - 1].id, " died\n");
+				usleep(1000);
 				return ;
 			}
 			pthread_mutex_unlock(inp->m_dead);

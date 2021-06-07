@@ -4,7 +4,7 @@ DIR		= ./srcs/
 
 HEADER	= ./includes/
 
-NAME	= philo_one
+NAME	= philo_three
 
 HFILES	= my_math.h\
 		  parser.h\

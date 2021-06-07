@@ -12,7 +12,7 @@ void	g_watcher(t_data *inp, t_ph *phils)
 		while (i[0]++ < inp->num_phil)
 		{
 			sem_wait(inp->s_dead);
-			if (p_time() > phils[i[0] - 1].time_to_die + 5)
+			if (p_time() > phils[i[0] - 1].time_to_die + 4)
 			{
 				sem_post(inp->s_dead);
 				if (inp->limit && phils[i[0] - 1].num_eat == inp->num_eat)
