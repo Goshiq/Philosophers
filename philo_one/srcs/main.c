@@ -6,8 +6,10 @@ void	g_watcher(t_data *inp, t_ph *phils)
 
 	while (1)
 	{
+		pthread_mutex_lock(inp->count);
 		if (inp->counter <= 0)
 			break ;
+		pthread_mutex_unlock(inp->count);
 		i = 0;
 		while (i++ < inp->num_phil)
 		{
@@ -19,7 +21,6 @@ void	g_watcher(t_data *inp, t_ph *phils)
 					continue ;
 				pthread_mutex_lock(inp->m_write);
 				put_alot(p_time() - inp->start, phils[i - 1].id, " died\n");
-				usleep(1000);
 				return ;
 			}
 			pthread_mutex_unlock(inp->m_dead);
@@ -74,6 +75,7 @@ int	main(int argc, char **argv)
 	if (init_phil(in, phils) || create_env(in, phils))
 		return (ft_err("Error: threads error\n"));
 	g_watcher(in, phils);
+	usleep(1000);
 	free_all(in, phils);
 	return (0);
 }

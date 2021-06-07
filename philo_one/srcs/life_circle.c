@@ -24,15 +24,17 @@ void	*life(void *ptr)
 	while (1)
 	{
 		p_eat(ph);
+		pthread_mutex_lock(ph->in->count);
 		if (ph->in->limit && ph->num_eat == ph->in->num_eat)
 		{
-			pthread_mutex_lock(ph->in->count);
 			ph->in->counter--;
 			pthread_mutex_unlock(ph->in->count);
 			break ;
 		}
+		pthread_mutex_unlock(ph->in->count);
 		p_sleep(ph);
 		p_think(ph);
+		usleep(100);
 	}
 	return (0x0);
 }
@@ -54,7 +56,9 @@ void	p_eat(t_ph *ph)
 	ph->time_to_die = p_time() + ph->in->t_die / 1000;
 	pthread_mutex_unlock(ph->in->m_dead);
 	usleep(ph->in->t_eat);
+	pthread_mutex_lock(ph->in->count);
 	ph->num_eat++;
+	pthread_mutex_unlock(ph->in->count);
 	pthread_mutex_unlock(ph->right);
 	pthread_mutex_unlock(ph->left);
 }
