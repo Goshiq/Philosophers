@@ -6,6 +6,7 @@ We are using threads (philo_one and philo_two parts) and processes(philo_three) 
 #### Usage:
 ```C
 make
+```
 cd into one of the dirs and start the program with arguments:
 0 - nymber of philosophers
 1 - time to die without eating
@@ -14,6 +15,7 @@ cd into one of the dirs and start the program with arguments:
 4 - optional, number of meals
 
 example:
+```C
 make
-cd ./philo_three && ./philo_three 200 1000 100 100 5
+cd ./philo_three && ./philo_three 200 1000 100 100 5 cd ..
 ```
