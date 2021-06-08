@@ -7,6 +7,7 @@ Clone the project:
 ```C
 git clone https://github.com/Goshiq/Philosophers.git && cd Philosophers
 ```
+Compile:
 ```C
 make
 ```
