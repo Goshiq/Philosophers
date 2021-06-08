@@ -8,11 +8,13 @@ We are using threads (philo_one and philo_two parts) and processes(philo_three) 
 make
 ```
 cd into one of the dirs and start the program with arguments:
+```C
 0 - nymber of philosophers
 1 - time to die without eating
 2 - time to eat
 3 - time to sleep
 4 - optional, number of meals
+```
 
 example:
 ```C
