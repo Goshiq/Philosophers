@@ -1,7 +1,6 @@
 # Philosophers
 
-### The project is about threads and processes
-We are using threads (philo_one and philo_two parts) and processes(philo_three) in this project
+##### We are using threads (philo_one and philo_two parts) and processes(philo_three) in this project
 
 #### Usage:
 Clone the project:
