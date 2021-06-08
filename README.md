@@ -14,9 +14,9 @@ make
 cd into one of the dirs and start the program with arguments:
 ```C
 0 - nymber of philosophers
-1 - time to die without eating
-2 - time to eat
-3 - time to sleep
+1 - time to die without eating in ms
+2 - time to eat in ms
+3 - time to sleep in ms
 4 - optional, number of meals
 ```
 
