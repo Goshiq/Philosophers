@@ -16,6 +16,26 @@ int	init_sem(t_data *inp)
 	return (0);
 }
 
+void	check_exit(t_data *inp)
+{
+	size_t	i;
+	int		status;
+
+	i = 0;
+	status = 0;
+	while (i < inp->num_phil)
+	{
+		waitpid(-1, &status, 0);
+		if (status)
+		{
+			i = 0;
+			while (i < inp->num_phil)
+				kill(inp->pid_id[i++], SIGKILL);
+		}
+		i++;
+	}
+}
+
 int	create_env(t_data *inp, t_ph *phils)
 {
 	size_t		i;
@@ -36,11 +56,7 @@ int	create_env(t_data *inp, t_ph *phils)
 		i++;
 		usleep(100);
 	}
-	waitpid(-1, NULL, 0);
-	usleep(300000);
-	i = 0;
-	while (i < inp->num_phil)
-		kill(inp->pid_id[i++], SIGKILL);
+	check_exit(inp);
 	return (0);
 }
 

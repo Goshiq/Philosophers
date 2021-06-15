@@ -20,7 +20,7 @@ void	*l_watcher(void *ptr)
 			sem_post(ph->in->s_count);
 			sem_wait(ph->in->s_write);
 			put_alot(p_time() - ph->in->start, ph->id, " died\n");
-			exit(0);
+			exit(1);
 		}
 		sem_post(ph->in->s_dead);
 		usleep(50);
